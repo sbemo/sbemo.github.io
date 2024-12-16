@@ -1,0 +1,412 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Docker教程 | sbemo</title><meta name="author" content="sbemo"><meta name="copyright" content="sbemo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="介绍什么是DockerDocker 是一个开源的容器化平台，用于自动化应用程序的部署。它包装软件及其依赖项到一个标准化的单元中，用于软件开发。使用 Docker 的主要场景包括：  应用程序的打包和部署：当您需要在不同的环境中一致地部署应用程序时，Docker 是一个理想的选择。它通过容器来确保应用程序在不同的系统和平台上表现一致。 微服务架构：对于采用微服务架构的系统，Docker 提供了隔离、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker教程">
+<meta property="og:url" content="http://perozs.top/2024/12/17/Docker%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="sbemo">
+<meta property="og:description" content="介绍什么是DockerDocker 是一个开源的容器化平台，用于自动化应用程序的部署。它包装软件及其依赖项到一个标准化的单元中，用于软件开发。使用 Docker 的主要场景包括：  应用程序的打包和部署：当您需要在不同的环境中一致地部署应用程序时，Docker 是一个理想的选择。它通过容器来确保应用程序在不同的系统和平台上表现一致。 微服务架构：对于采用微服务架构的系统，Docker 提供了隔离、">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://perozs.top/img/face.jpg">
+<meta property="article:published_time" content="2024-12-16T16:15:29.000Z">
+<meta property="article:modified_time" content="2024-12-16T16:57:15.241Z">
+<meta property="article:author" content="sbemo">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://perozs.top/img/face.jpg"><link rel="shortcut icon" href="/img/favi.png"><link rel="canonical" href="http://perozs.top/2024/12/17/Docker%E6%95%99%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Docker教程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-12-17 00:57:15'
+}</script><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/background.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/face.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/top.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/favi.png" alt="Logo"><span class="site-name">sbemo</span></a><a class="nav-page-title" href="/"><span class="site-name">Docker教程</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Docker教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-16T16:15:29.000Z" title="发表于 2024-12-17 00:15:29">2024-12-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-16T16:57:15.241Z" title="更新于 2024-12-17 00:57:15">2024-12-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>24分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><div class="top-img gist" style="background-image: url(/img/top.jpg)"></div><article class="post-content" id="article-container"><h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="什么是Docker"><a href="#什么是Docker" class="headerlink" title="什么是Docker"></a>什么是Docker</h2><p>Docker 是一个开源的容器化平台，用于自动化应用程序的部署。它包装软件及其依赖项到一个标准化的单元中，用于软件开发。使用 Docker 的主要场景包括：</p>
+<ul>
+<li>应用程序的打包和部署：当您需要在不同的环境中一致地部署应用程序时，Docker 是一个理想的选择。它通过容器来确保应用程序在不同的系统和平台上表现一致。</li>
+<li>微服务架构：对于采用微服务架构的系统，Docker 提供了隔离、快速部署和伸缩性，非常适合于管理和部署微服务。</li>
+<li>CI&#x2F;CD 流程：Docker 可以很好地集成到持续集成和持续部署（CI&#x2F;CD）的流程中，实现自动化测试和部署。</li>
+</ul>
+<h2 id="为什么用Docker？"><a href="#为什么用Docker？" class="headerlink" title="为什么用Docker？"></a>为什么用Docker？</h2><ul>
+<li>Docker提供了更高级别的隔离（操作系统级别），而 Conda 提供了较低级别（Python&#x2F;R 环境级别）的隔离。</li>
+<li>Docker 适合部署一些深度学习环境。<ul>
+<li>服务器CUDA版本不允许升级或降级时，使用Docker可以解决。只要宿主机的 NVIDIA 驱动与容器内部的 CUDA 版本兼容即可正常运行使用GPU的docker容器。</li>
+<li>思路：在Windows上搭建基础镜像，连进容器配置环境，通过docker commit保存镜像，再通过docker save导出，迁移到服务器上。</li>
+</ul>
+</li>
+<li>有些应用需要在Docker部署，比如coffee AI。</li>
+<li>网络问题，有了镜像就可以共享给其他人，不需要其他人再下载。</li>
+</ul>
+<h2 id="容器和镜像"><a href="#容器和镜像" class="headerlink" title="容器和镜像"></a>容器和镜像</h2><ul>
+<li>镜像（Image）和容器（Container）的关系，就像是面向对象程序设计中的类和实例一样。</li>
+<li>镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。</li>
+</ul>
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p>Docker 可以通过读取 Dockerfile创建一个镜像，Dockerfile 是一个文本文档，其中包含用户可以在命令行上调用和组合镜像的所有命令。<br>Dockerfile常见命令：</p>
+<ul>
+<li>FROM：Dockerfile必须从From开始，它为容器设置最基础的镜像</li>
+<li>WORKDIR：我们的工作目录，为后面的RUN等指令设置工作目录</li>
+<li>RUN：运行指令</li>
+<li>COPY：把Dockerfile所在目录的一些文件拷贝到工作空间</li>
+<li>EXPOSE：容器在运行时侦听的端口，它只是声明容器运行时需要监听的端口号，需要使用 docker run 命令的 -p 参数来将容器端口映射到宿主机上。比如-p 8080:80，表示将容器的 80 端口映射到宿主机的 8080 端口上。</li>
+<li>HEALTHCHECK：告诉 Docker 如何测试容器以检查它是否仍在工作</li>
+<li>ENTRYPOINT：配置容器，里面包括了可以run的py文件，也包括了run指令，可以让容器创建时去运行某些指令</li>
+</ul>
+<h2 id="写Dockerfile的注意事项，随时补充"><a href="#写Dockerfile的注意事项，随时补充" class="headerlink" title="写Dockerfile的注意事项，随时补充"></a>写Dockerfile的注意事项，随时补充</h2><ol>
+<li>From的镜像可以选择更基础的镜像。</li>
+<li>pip 后面增加 –no-cache-dir，减少缓存。</li>
+<li>在同一个RUN里不同的命令经常用 &amp;&amp; 来连接这是一种常见的做法，主要有以下几个原因：</li>
+<li>减少图层： Dockerfile 中的每个 RUN 指令都会创建一个新的图层。通过使用 &amp;&amp; 将多个命令连接在一起，可以减少生成的图层的数量。这样做的好处是创建更小、更简洁的镜像，并且可能提高构建速度。</li>
+<li>确保所有命令都成功执行： 当使用 &amp;&amp; 时，如果一个命令失败（返回非零退出状态），整个 RUN 指令将失败并停止执行。这意味着如果 apt update 失败，紧随其后的 apt install 不会执行。这是一种保护措施，以确保不会在部分更新的或不一致的状态下构建镜像。</li>
+<li>清洁和优化： 通过在一个 RUN 指令中连接多个命令，您可以在完成必要的安装和配置后立即进行清理（例如，删除临时文件或清除缓存）。这有助于保持镜像的大小尽可能小。</li>
+<li>apt install 后面 rm -rf &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;*。</li>
+</ol>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p>查看docker所有命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commond --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+<h2 id="镜像操作"><a href="#镜像操作" class="headerlink" title="镜像操作"></a>镜像操作</h2><p>查看docker所有镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+<p>下载镜像，Tag表示版本，有些镜像的版本显示latest，为最新版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull 镜像名:TAG</span><br></pre></td></tr></table></figure>
+<p>删除镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi 镜像名:TAG</span><br></pre></td></tr></table></figure>
+
+<p>使用国内源来拉取镜像，将registry.docker-cn.com填写到镜像名前。</p>
+<ol>
+<li>Docker中国区官方镜像：<a target="_blank" rel="noopener" href="https://registry.docker-cn.com/">https://registry.docker-cn.com</a></li>
+<li>网易：<a target="_blank" rel="noopener" href="http://hub-mirror.c.163.com/">http://hub-mirror.c.163.com</a></li>
+<li>ustc：<a target="_blank" rel="noopener" href="https://docker.mirrors.ustc.edu.cn/">https://docker.mirrors.ustc.edu.cn</a></li>
+<li>中国科技大学：<a target="_blank" rel="noopener" href="https://docker.mirrors.ustc.edu.cn/">https://docker.mirrors.ustc.edu.cn</a></li>
+<li>阿里云容器 生成自己的加速地址：登录：cr.console.aliyun.com<br>windows 可以直接在设置里填入加速的地址。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&quot;registry-mirrors&quot;</span>:[<span class="string">&quot;https://reg-mirror.qiniu.com/&quot;</span>]&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/1.png" alt="图片"></p>
+<p>获取镜像的元信息，获取镜像的详细信息，包括存放地址等等</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 镜像名:TAG</span><br></pre></td></tr></table></figure>
+<p>从本地的压缩包里导入镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i 压缩包名</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load &lt; 压缩包所在路径</span><br></pre></td></tr></table></figure>
+<p>使用Dockerfile构建镜像，.表示Dockerfile所在路径，-t表示镜像名和TAG</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t 镜像名:TAG .</span><br></pre></td></tr></table></figure>
+<p>如果 Dockerfile 文件不在当前目录中，或者 Dockerfile 文件的名称不是 Dockerfile，则可以使用 -f 参数来指定 Dockerfile 文件的路径和名称。</p>
+<h2 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h2><p>运行容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name 容器名 -i -t -p 主机端口:容器端口 -d -v 主机目录:容器目录:ro 镜像ID或镜像名:TAG</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-i：表示以交互模式运行容器</li>
+<li>-t：表示分配一个伪终端</li>
+<li>-p：表示将主机的端口映射到容器的端口</li>
+<li>-d：表示容器运行后处于后台</li>
+<li>-v：表示挂载主机目录到容器目录，ro表示只读</li>
+<li>–name：表示容器名</li>
+<li>镜像ID或镜像名:TAG：表示镜像名和TAG</li>
+</ul>
+<p>容器列表</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a -q</span><br></pre></td></tr></table></figure>
+<ul>
+<li>docker ps查看正在运行的容器</li>
+<li>-a 查看所有容器（运行中、未运行）</li>
+<li>-q 只查看容器的ID</li>
+<li>-as 查看容器占用存储空间<br>启动容器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start 容器ID</span><br></pre></td></tr></table></figure>
+停止容器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器ID</span><br></pre></td></tr></table></figure>
+删除容器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">rm</span> -f 容器ID或容器名</span><br></pre></td></tr></table></figure></li>
+<li>-f 表示强制删除</li>
+<li>-v 表示删除容器时删除挂载的卷</li>
+<li>-a 表示删除所有容器</li>
+<li>-l 表示删除容器时删除关联的链接</li>
+<li>-p 表示删除容器时删除关联的端口</li>
+<li>-s 表示删除容器时删除关联的网络</li>
+<li>-t 表示删除容器时删除关联的定时任务</li>
+<li>-u 表示删除容器时删除关联的用户</li>
+<li>-w 表示删除容器时删除关联的网络<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container prune <span class="comment"># 删除所有没有运行的容器，谨慎操作</span></span><br></pre></td></tr></table></figure>
+进入运行容器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it 容器ID /bin/bash</span><br></pre></td></tr></table></figure></li>
+<li>进入正在运行的容器并且开启交互模式终端</li>
+<li>&#x2F;bin&#x2F;bash是固有写法，作用是因为docker后台必须运行一个进程，否则容器就会退出，在这里表示启动容器后启动<br>bash。</li>
+<li>也可以用docker exec在运行中的容器执行命令</li>
+</ul>
+<p>查看容器使用的资源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stats 命令会每隔 1 秒钟刷新一次输出的内容直到按下 ctrl + c</span><br></pre></td></tr></table></figure>
+<p>输出的主要内容：</p>
+<ul>
+<li>[CONTAINER]：以短格式显示容器的 ID。</li>
+<li>[NAME]：容器名称</li>
+<li>[CPU %]：CPU 的使用情况。</li>
+<li>[MEM USAGE &#x2F; LIMIT]：当前使用的内存和最大可以使用的内存。</li>
+<li>[MEM %]：以百分比的形式显示内存使用情况。</li>
+<li>[NET I&#x2F;O]：网络 I&#x2F;O 数据。</li>
+<li>[BLOCK I&#x2F;O]：磁盘 I&#x2F;O 数据。</li>
+<li>[PIDS]：PID 号。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker stats</span><br><span class="line">docker stats --no-stream <span class="comment"># 只显示一次资源情况，不实时跟踪</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="制作Docker镜像"><a href="#制作Docker镜像" class="headerlink" title="制作Docker镜像"></a>制作Docker镜像</h1><p>两种方式，一种是根据已有镜像使用docker commit构建，另一种是根据已有镜像使用Dockerfile构建。</p>
+<h2 id="根据已有镜像使用docker-commit构建"><a href="#根据已有镜像使用docker-commit构建" class="headerlink" title="根据已有镜像使用docker commit构建"></a>根据已有镜像使用docker commit构建</h2><p>这一方法的核心是docker commit</p>
+<ul>
+<li>docker commit可以从容器创建一个新的镜像。</li>
+<li>通过对运行中的容器进行更改，然后使用 docker commit 命令，可以将容器的当前状态保存为新镜像。</li>
+<li>这种方法适用于快速的实验，但不推荐用于生产环境，因为：<ul>
+<li>docker commit不会明确记录构建过程，缺乏可重复性和透明性，会产生所谓的黑箱镜像。</li>
+<li>在容器中执行命令，会有很多文件被改动或添加。安装软件包、编译构建，那会有大量的无关内容被添加进来，将会导致镜像极为臃肿。</li>
+<li>简单的Python训练环境，可以用这个方法图方便，快速构建镜像。<br>思路：</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>先拉取已有的镜像。</li>
+<li>使用镜像运行容器后，在容器内安装项目需要的Python依赖。</li>
+<li>将整个容器通过docker commit指令制作成镜像。</li>
+<li>导出镜像，在服务器上导入。</li>
+</ol>
+<h3 id="拉取已有镜像"><a href="#拉取已有镜像" class="headerlink" title="拉取已有镜像"></a>拉取已有镜像</h3><p>官方Pytorch镜像：<a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch#docker-image">https://github.com/pytorch/pytorch#docker-image</a><br>也可以从docker hub里找到官方Pytorch镜像：<a target="_blank" rel="noopener" href="https://hub.docker.com/r/pytorch/pytorch/tags">https://hub.docker.com/r/pytorch/pytorch/tags</a><br><a target="_blank" rel="noopener" href="https://hub.docker.com/r/pytorch/pytorch/tags">https://hub.docker.com/r/pytorch/pytorch/tags</a><br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/2.png" alt="图片"><br>同样的pytorch和cuda版本会有两种镜像，分别是devel和runtime镜像，区别如下：<br>devel 镜像：</p>
+<ul>
+<li>用途：devel（开发）镜像包含了编译和运行 CUDA 应用所需的所有依赖，包括编译器和开发工具。</li>
+<li>适用场景：如果您需要编译使用 CUDA 的自定义操作或者需要编译整个 PyTorch 源代码，那么 devel 镜像是必需的。</li>
+<li>大小：由于包含更多的开发工具和库，devel 镜像通常比 runtime 镜像大很多。<br>runtime 镜像：</li>
+<li>用途：runtime（运行时）镜像仅包含运行基于 CUDA 的应用程序所必需的库和工具。</li>
+<li>适用场景：如果您只需要运行已经编译好的 CUDA 应用程序，而不需要进行额外的编译或开发工作，runtime 镜像就足够了。</li>
+<li>大小：相较于 devel 镜像，runtime 镜像更小，因为它不包含额外的编译工具和库。<br>我们也可以用其他人发布的可靠的镜像：<a target="_blank" rel="noopener" href="https://github.com/cnstark/pytorch-docker">https://github.com/cnstark/pytorch-docker</a><br>这里我选择的镜像是：cnstark&#x2F;pytorch:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04，它包括了一个ubuntu22.04操作系统，python3.10，gpu版本的pytorch2.0.1和cuda11.8。<br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/3.png" alt="图片"><br>拉取镜像<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull cnstark/pytorch:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04</span><br></pre></td></tr></table></figure>
+通过docker images可以看到，已经成功拉取了镜像。<br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/4.png" alt="图片"><br>介绍镜像的网址一般会给出使用的方法，也就是创建容器的参数，我使用了cnstark&#x2F;pytorch:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04这个镜像，它的用法和pytorch给的docker容器是一样的。<br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/5.png" alt="图片"><br>即：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --<span class="built_in">rm</span> \</span><br><span class="line">    --gpus all \</span><br><span class="line">    --net host </span><br><span class="line">    -v /path/to/project:/path/to/project \</span><br><span class="line">    -v /path/to/dataset:/path/to/dataset \</span><br><span class="line">    cnstark/pytorch:[TAG]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h3><p>在Windows系统的Windows PowerShell中，用反引号&#96;表示换行。如果要在命令行中使用反斜杠\来进行换行，需要在\字符后面再加上一个空格，否则反斜杠\就会被解释为一个转义字符。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --<span class="built_in">rm</span> `</span><br><span class="line">    --gpus all `</span><br><span class="line">    --net host `</span><br><span class="line">    -v E:/Project/Diffusion/DiffTraj-main:/app `</span><br><span class="line">    cnstark/pytorch:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04</span><br></pre></td></tr></table></figure>
+<p>Ubuntu系统，使用反斜杠\进行换行，使用下面的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --<span class="built_in">rm</span> \</span><br><span class="line">    --gpus all \</span><br><span class="line">    --net host </span><br><span class="line">    -v E:/Project/Diffusion/DiffTraj-main:/app \</span><br><span class="line">    cnstark/pytorch:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04</span><br></pre></td></tr></table></figure>
+<p>这些参数很重要！！！</p>
+<ul>
+<li>-it：前台运行容器，关了终端就关闭容器了。这个参数表示启用交互式终端，也就是让您能够与容器进行交互。-i表示交互式，-t表示分配一个伪终端。</li>
+<li>-dit：后台运行容器，并启用交互式终端，也就是让您能够与容器进行交互。-d表示后台运行，-i表示交互式，-t表示分配一个伪终端。</li>
+<li>–rm：这个参数表示容器退出后自动删除容器文件系统，这样可以防止容器文件系统占用过多的磁盘空间。<ul>
+<li>在Docker容器退出时，默认容器内部的文件系统仍然被保留，以方便调试并保留用户数据。</li>
+<li>在Docker Desktop里暂停掉–rm的容器后，会自动把这个容器删除，所以有时候可以不加上。</li>
+</ul>
+</li>
+<li>–gpus all：这个参数表示将所有的GPU都分配给容器使用。这个参数需要在安装了NVIDIA驱动和Docker的情况下才能生效。</li>
+<li>–net host：这个参数表示容器将使用主机网络，这意味着容器将与主机共享网络命名空间，可以访问主机上的网络设备和服务。</li>
+<li>-v E:&#x2F;Project&#x2F;Diffusion&#x2F;DiffTraj-main:&#x2F;app：这个参数表示将主机上的E:&#x2F;Project&#x2F;Diffusion&#x2F;DiffTraj-main目录挂载到容器内的&#x2F;app目录中，这样容器就可以访问主机上的这个目录。</li>
+<li>cnstark&#x2F;pytorch:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04：这个参数表示要使用的Docker镜像的名称和标签。在这个例子中，使用的是cnstark&#x2F;pytorch镜像的2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04标签，这个镜像包含了PyTorch深度学习框架和CUDA工具包，可以在容器中运行深度学习任务。<br>如果之后项目里的文件比较多，建议使用挂载的方式，挂载可以让容器和宿主机共享数据。当你将宿主机上的目录或文件挂载到容器中时，容器中的该目录或文件就会和宿主机上的目录或文件保持同步，它们之间的修改都会相互影响。<br>执行好docker run后，可以看到，我们已经运行了容器并且启动了交互式终端。</li>
+</ul>
+<p>执行好docker run后，可以看到，我们已经运行了容器并且启动了交互式终端。<br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/6.png" alt="图片"><br>如果我们进入app目录，会看到我们的项目已经被成功挂载了。<br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/7.png" alt="图片"><br>我们输入pip list和python –version，可以看到这个容器已经安装了py3.10.11-cuda11.8.0。<br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/8.png" alt="图片"></p>
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>我们拉取的镜像里只包含了最纯净的pytorch:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04，根据我们要部署的应用，可能还需要有一些依赖包需要我们手动安装。<br>我们可以写一个或者生成一个requirement.txt用于安装我们项目需要的其他依赖，我在目录里创建一个requirement.txt后，可以看到app目录也会有这个文件，这就是挂载的含义。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">colored==2.2.4</span><br><span class="line">matplotlib==3.8.0</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/9.png" alt="图片"><br>这里我用pip补充安装了两个包colored&#x3D;&#x3D;2.2.4和matplotlib&#x3D;&#x3D;3.8.0。<br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/10.png" alt="图片"></p>
+<h3 id="导出镜像"><a href="#导出镜像" class="headerlink" title="导出镜像"></a>导出镜像</h3><p>先不关闭原来的docker终端，另外新建一个终端，通过docker ps可以看到我们的容器正在运行，容器的ID是a563dee1debf。<br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/11.png" alt="图片"><br>接着我们使用docker commit命令去创建一个镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit CONTAINER ID REPOSITORY:TAG</span><br></pre></td></tr></table></figure>
+<ul>
+<li>CONTAINER ID表示容器ID，通过docker ps查询</li>
+<li>REPOSITORY:TAG表示生成的容器名和标签，可以任意命名<br>这里我使用如下命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit a563dee1debf difftraj:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04</span><br></pre></td></tr></table></figure>
+通过docker images可以看到，已经创建了这个镜像。<br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/12.png" alt="图片"><br>我们可以根据这个镜像创建一个容器进行验证<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --<span class="built_in">rm</span> `</span><br><span class="line">    --gpus all `</span><br><span class="line">    --net host `</span><br><span class="line">    -v E:/Project/Diffusion/DiffTraj-main:/app `</span><br><span class="line">    difftraj:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04</span><br></pre></td></tr></table></figure>
+直接python main.py，发现可以运行，说明在这个镜像里已经把训练模型需要的包安装好了。<br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/13.png" alt="图片"></li>
+</ul>
+<h3 id="打包镜像"><a href="#打包镜像" class="headerlink" title="打包镜像"></a>打包镜像</h3><p>我们使用docker save命令保存镜像，在Ubuntu中，可以使用gzip进行压缩：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save REPOSITORY:TAG |gzip &gt; 镜像名</span><br></pre></td></tr></table></figure>
+<p>这里使用命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save difftraj:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04 |gzip &gt; difftraj_images.tar.gz</span><br></pre></td></tr></table></figure>
+<p>如果在windows中，可以使用下面的命令，修改成自己的路径，导出可能要一两分钟。这里将镜像名设置为difftraj_image.tar，并保存到E:\Project\Diffusion\DiffTraj-main目录。<br>如果要导出到windows上进行导入，后缀可以用tar，如果要导出到linux上进行导入，后缀可以用tar.gz</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save difftraj:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04 -o E:\Project\Diffusion\DiffTraj-main\difftraj_image.tar</span><br></pre></td></tr></table></figure>
+<p>注意导出镜像的时候，用使用镜像的名字和TAG，不要用镜像ID，否则在导入镜像的时候，镜像的名字和TAG都会为空，需要重新命名，重新命名命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag [镜像<span class="built_in">id</span>] [新镜像名称]:[新镜像标签]</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/14.png" alt="图片"></p>
+<h3 id="导入镜像"><a href="#导入镜像" class="headerlink" title="导入镜像"></a>导入镜像</h3><p>Ubuntu使用如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load &lt; 压缩包所在路径</span><br></pre></td></tr></table></figure>
+<p>Windows使用如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i 压缩包所在路径</span><br></pre></td></tr></table></figure>
+<h2 id="根据已有镜像使用Dockerfile构建"><a href="#根据已有镜像使用Dockerfile构建" class="headerlink" title="根据已有镜像使用Dockerfile构建"></a>根据已有镜像使用Dockerfile构建</h2><p>这一方法的核心是创建Dockerfile</p>
+<ul>
+<li>使用Dockerfile创建镜像是比较标准的流程，推荐使用这种方法<ul>
+<li>Dockerfile里面的一些命令。</li>
+<li>Docker创建镜像时的上下文含义。<br>思路：</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>先创建Dockerfile，使用From命令选择基于什么镜像。</li>
+<li>根据自己的需求，在Dockerfile里使用RUN命令安装各种依赖。</li>
+<li>使用docker build创建镜像。</li>
+<li>使用docker run创建容器。运行一下代码，测试镜像里的依赖是否满足项目的要求，如果还缺少依赖，则回到第二步，在Dockerfile里使用RUN补充安装依赖。</li>
+<li>导出镜像，在服务器上导入。</li>
+</ol>
+<h3 id="创建Dockerfile"><a href="#创建Dockerfile" class="headerlink" title="创建Dockerfile"></a>创建Dockerfile</h3><p>在使用Dockerfile构建镜像时，由于Docker的原理，我们一般会将 Dockerfile 置于一个空目录下，或者项目的根目录下。<br>这里以轨迹扩散模型的项目为例子，完整的Dockerfile如下，我们用到了 FROM WORKDIR COPY 和 RUN 这四个命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">FROM cnstark/pytorch:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04</span><br><span class="line"></span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line">COPY requirements.txt /app</span><br><span class="line"></span><br><span class="line">RUN pip install --no-cache-dir -r requirements.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># （可选）复制当前目录下的其他文件到容器的 /app 目录</span></span><br><span class="line">COPY . /app</span><br><span class="line"></span><br><span class="line"><span class="comment"># （可选）设置容器启动时执行的命令</span></span><br><span class="line">CMD [<span class="string">&quot;python&quot;</span>, <span class="string">&quot;your_script.py&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p>From命令：Dockerfile必备的第一条指令，指定基础镜像，可以是服务类的镜像nginx、redis、mongo、mysql、httpd、php、tomcat，也可以是操作系统镜像ubuntu、debian、centos、fedora、alpine。</p>
+<p>From命令如果选择了很大的基础镜像，那最后制作的docker镜像占的空间也会很大。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FROM cnstark/pytorch:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04</span><br></pre></td></tr></table></figure>
+<p>WORKDIR命令：设置后续指令的工作目录，一般写在COPY和RUN前面。<br>然后通过WORKDIR命令，确定工作目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WORKDIR /app</span><br></pre></td></tr></table></figure>
+<p>COPY命令：将文件复制到镜像的指定目录中中。<br>接着通过COPY命令，将复制requirements.txt到镜像里的工作目录&#x2F;app。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY requirements.txt /app</span><br></pre></td></tr></table></figure>
+<p>RUN命令：RUN命令可以像Shell脚本一样执行命令，后面的内容和直接在命令行中输入的命令是一样的。<br>最后通过RUN命令，执行pip命令，安装Python项目的依赖。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN pip install --no-cache-dir -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>我们也可以这么写，直接用RUN去执行pip命令安装我们需要的包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 cnstark/pytorch 镜像作为基础镜像</span></span><br><span class="line">FROM cnstark/pytorch:2.0.1-py3.10.11-cuda11.8.0-ubuntu22.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工作目录</span></span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 pip 安装所需的包</span></span><br><span class="line">RUN pip install --no-cache-dir colored==2.2.4 matplotlib==3.8.0</span><br></pre></td></tr></table></figure>
+<h3 id="创建镜像"><a href="#创建镜像" class="headerlink" title="创建镜像"></a>创建镜像</h3><p>理解 docker build 的工作原理</p>
+<ul>
+<li>Docker 在运行时分为 Docker 引擎（也就是服务端守护进程）和客户端工具。Docker 的引擎提供了一组 REST API，被称为 Docker Remote API，而如 docker 命令这样的客户端工具，则是通过这组 API 与 Docker 引擎交互，从而完成各种功能。</li>
+<li>因此，虽然表面上我们好像是在本机执行各种 docker 功能，但实际上，一切都是使用的远程调用形式在服务端（Docker 引擎）完成。也因为这种 C&#x2F;S 设计，让我们操作远程服务器的 Docker 引擎变得轻而易举。</li>
+<li>当我们进行镜像构建的时候，并非所有定制都会通过 RUN 指令完成，经常会需要将一些本地文件复制进镜像，比如通过 COPY 指令、ADD 指令等。而 docker build 命令构建镜像，其实并非在本地构建，而是在服务端，也就是 Docker 引擎中构建的。那么在这种客户端&#x2F;服务端的架构中，如何才能让服务端获得本地文件呢？</li>
+<li>这就引入了上下文的概念。当构建的时候，用户会指定构建镜像上下文的路径，docker build 命令得知这个路径后，会将路径下的所有内容打包，然后上传给 Docker 引擎。这样 Docker 引擎收到这个上下文包后，展开就会获得构建镜像所需的一切文件。</li>
+</ul>
+<p>使用docker build命令，基于Dockerfile构建镜像。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t <span class="built_in">test</span>:v1.0 .</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最后这个点号表示Docker 镜像构建的上下文（Context），就在当前Dockerfile所在的目录。</li>
+<li>也就是表示，构建这个镜像需要的所有文件，都在这个目录，比如这里的requirements.txt。</li>
+<li>COPY 这类指令中的源文件的路径都是相对路径，所以我们应该把构建镜像需要的文件都复制到上下文目录中。<br><img src="/2024/12/17/Docker%E6%95%99%E7%A8%8B/15.png" alt="图片"></li>
+</ul>
+<h3 id="打包镜像-1"><a href="#打包镜像-1" class="headerlink" title="打包镜像"></a>打包镜像</h3><p>最后使用docker save打包镜像即可，见3.1.5。</p>
+<h3 id="使用Dockerfile从0开始构建"><a href="#使用Dockerfile从0开始构建" class="headerlink" title="使用Dockerfile从0开始构建"></a>使用Dockerfile从0开始构建</h3><h2 id="创建Dockerfile-1"><a href="#创建Dockerfile-1" class="headerlink" title="创建Dockerfile"></a>创建Dockerfile</h2><p>Difftraj镜像，指定版本的 PyTorch、Python、CUDA 以及 colored&#x3D;&#x3D;2.2.4 和 matplotlib&#x3D;&#x3D;3.8.0。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 Ubuntu 22.04 作为基础镜像</span></span><br><span class="line">FROM ubuntu:22.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置非交互式安装，避免在安装过程中出现提示</span></span><br><span class="line">ENV DEBIAN_FRONTEND=noninteractive</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新软件源并安装 Python 3.10 和 pip</span></span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -y \</span><br><span class="line">    python3.10 \</span><br><span class="line">    python3-pip \</span><br><span class="line">    &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 Python 3.10 为默认的 Python 版本</span></span><br><span class="line">RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 CUDA 11.8.0（这里假设您需要的是 CUDA Toolkit，而不是完整的 NVIDIA 驱动）</span></span><br><span class="line"><span class="comment"># 这里需要找到合适的 CUDA Toolkit 11.8.0 的安装方法，以下仅为示例</span></span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -y \</span><br><span class="line">    software-properties-common \</span><br><span class="line">    &amp;&amp; add-apt-repository ppa:graphics-drivers/ppa \</span><br><span class="line">    &amp;&amp; apt-get update \</span><br><span class="line">    &amp;&amp; apt-get install -y cuda-toolkit-11-8 \</span><br><span class="line">    &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 PyTorch 2.0.1（确保这个版本与您的 CUDA 版本兼容）</span></span><br><span class="line">RUN pip install torch==2.0.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装其他必要的 Python 包</span></span><br><span class="line">RUN pip install colored==2.2.4 matplotlib==3.8.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工作目录</span></span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制应用代码到工作目录</span></span><br><span class="line">COPY . /app</span><br><span class="line"></span><br><span class="line"><span class="comment"># 镜像构建完成后的默认命令</span></span><br><span class="line">CMD [<span class="string">&quot;python&quot;</span>, <span class="string">&quot;your_script.py&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置标签</span></span><br><span class="line">LABEL maintainer=<span class="string">&quot;yourname@example.com&quot;</span></span><br><span class="line"></span><br><span class="line">下面这个是Steamlit官方用Docker安装教程里给出的Dockerfile，这个Dockerfile安装了git，又从git上<span class="built_in">clone</span>了streamlit的一个demo。</span><br><span class="line"><span class="comment"># /app</span></span><br><span class="line"></span><br><span class="line">FROM python:3.9-slim</span><br><span class="line"></span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -y \</span><br><span class="line">    build-essential \</span><br><span class="line">    curl \</span><br><span class="line">    software-properties-common \</span><br><span class="line">    git \</span><br><span class="line">    &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span><br><span class="line"></span><br><span class="line">RUN git <span class="built_in">clone</span> https://github.com/streamlit/streamlit-example.git .</span><br><span class="line"></span><br><span class="line">RUN pip3 install -r requirements.txt</span><br><span class="line"></span><br><span class="line">EXPOSE 8501</span><br><span class="line"></span><br><span class="line">HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health</span><br><span class="line"></span><br><span class="line">ENTRYPOINT [<span class="string">&quot;streamlit&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;streamlit_app.py&quot;</span>, <span class="string">&quot;--server.port=8501&quot;</span>, <span class="string">&quot;--server.address=0.0.0.0&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建镜像-1"><a href="#创建镜像-1" class="headerlink" title="创建镜像"></a>创建镜像</h2><p>在建立好Dockerfile文件后，使用docker build创建镜像，再使用docker run创建容器。</p>
+<ol>
+<li>docker build 会根据你写的dockerfile文件创建镜像。</li>
+<li>docker run 会根据你创建好的镜像运行容器。</li>
+</ol>
+<p>创建镜像，-t 表示指定镜像名称为streamlit，-f表示指定目录的Dockfile，这里用的是绝对路径。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -f /home/streamlit/Dockerfile -t streamlit .</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h2><p>运行镜像，-p 表示宿主机占用的端口，-v 表示挂载两个目录，–name 表示指定容器名字，方便后续停止，-d表示将容器挂载到后台运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8501:8501 -v /home/streamlit:/app --name streamlit -d streamlit</span><br></pre></td></tr></table></figure>
+<p>浏览器里输入 http:&#x2F;&#x2F;你的服务器IP地址:8501&#x2F;，即可进入streamlit应用界面，部署完成。<br>如果之后项目里的文件比较多，建议使用挂载的方式，挂载可以让容器和宿主机共享数据。当你将宿主机上的目录或文件挂载到容器中时，容器中的该目录或文件就会和宿主机上的目录或文件保持同步，它们之间的修改都会相互影响。<br>比如之后要把镜像里的&#x2F;app&#x2F;目录挂载到到硬盘的某个目录，比如&#x2F;home&#x2F;streamlit目录，使用 -v 参数即可。这样就不需要在Dockerfile文件里使用COPY命令了。在其中一个目录的修改会影响到另一个目录的修改。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8501:8501 -v /home/streamlit:/app -d streamlit </span><br></pre></td></tr></table></figure>
+
+<h1 id="注意事项（更新ing）"><a href="#注意事项（更新ing）" class="headerlink" title="注意事项（更新ing）"></a>注意事项（更新ing）</h1><h2 id="Docker-build-缓存机制"><a href="#Docker-build-缓存机制" class="headerlink" title="Docker build 缓存机制"></a>Docker build 缓存机制</h2><p>在 docker build 的过程中，Docker 会缓存每一步构建的结果。也就是说，如果你重新执行 docker build 命令时，Docker 会尝试使用缓存来加速构建过程。<br>Docker 缓存的工作原理：每个 Dockerfile 指令（如 FROM, COPY, RUN 等）都会创建一个新的层，Docker 会缓存每个层的结果。如果 docker build 过程中某个层的指令及内容没有变化，Docker 就会跳过这一步，并使用缓存的层。</p>
+<ol>
+<li>确保 Docker 重新复制了修改后的文件<br>为了强制 Docker 在构建时重新复制修改后的文件，你可以通过以下几种方法解决缓存问题：<br>方法一：使用 –no-cache 标志： 你可以在构建镜像时使用 –no-cache 参数来禁用 Docker 的缓存机制。这会强制 Docker 重新执行所有步骤，包括复制文件、安装依赖等。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build --no-cache -t &#123;name&#125; .</span><br></pre></td></tr></table></figure>
+方法二：手动修改 Dockerfile 来破坏缓存： 另一种方法是通过修改 Dockerfile 的某些部分来强制 Docker 重新构建相关的层。例如，如果你修改了代码文件，并且 COPY 指令复制了这些文件，你可以通过修改 Dockerfile 中相关步骤的顺序或其他内容来“破坏”缓存。<br>比如，将 COPY 指令移动到 Dockerfile 的最后，或者在 COPY 之前做一个小的修改（如添加一个临时的 RUN 命令），这样 Docker 会认为该步骤有了变化，并重新执行复制文件的操作。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先执行其他操作</span></span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">&quot;Temporary change to break cache&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 再复制修改后的文件</span></span><br><span class="line">COPY . /app</span><br></pre></td></tr></table></figure>
+这样，COPY 指令就不会被缓存，因为 Docker 认为文件发生了变化。</li>
+<li>重新启动容器时确保使用最新的镜像<br>确保在执行 docker run 启动容器时使用的是你刚刚构建的最新镜像。特别是，如果你有多个版本的镜像，可能会不小心启动旧的镜像。<br>可以通过以下命令确保使用最新构建的镜像：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 5000:5000 --<span class="built_in">rm</span> &#123;name&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>–rm：这个选项会在容器停止后自动删除容器，避免你重复使用旧容器。</li>
+<li>imagemagick：确保这指向你最新构建的镜像。</li>
+</ul>
+<p>参考文档：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ExMan/p/13040240.html">https://www.cnblogs.com/ExMan/p/13040240.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/build/cache/invalidation/">https://docs.docker.com/build/cache/invalidation/</a></li>
+</ul>
+<h2 id="Docker-build-网络问题1"><a href="#Docker-build-网络问题1" class="headerlink" title="Docker build 网络问题1"></a>Docker build 网络问题1</h2><p>如果你利用docker build执行Dockerfile创建镜像时，在第一行命令，例如FROM python:3.9，就遇到了网络错误。但是你检查你的网络连接并没有问题的话，你可以先执行docker pull python:3.9命令拉去基础镜像，然后执行docker build命令继续创建Dockerfile的镜像。（具体原因没搞明白。）</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://perozs.top">sbemo</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://perozs.top/2024/12/17/Docker%E6%95%99%E7%A8%8B/">http://perozs.top/2024/12/17/Docker%E6%95%99%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://perozs.top" target="_blank">sbemo</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Docker/">Docker</a></div><div class="post-share"><div class="social-share" data-image="/img/face.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/12/17/Docker%E4%B8%8B%E8%BD%BD/" title="Docker下载"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Docker下载</div></div><div class="info-2"><div class="info-item-1">CentOS8安装DockerCentOS8使用Docker部署Streamlit 部署环境：  Linux：Linux 操作系统，以 CentOS Stream 8 为例。 Docker：容器管理，以Docker CE 24.0.7为例。  安装卸载旧版本 12345678sudo yum remove docker \                docker-client \                docker-client-latest \                docker-common \                docker-latest \                docker-latest-logrotate \                docker-logrotate \                docker-engine  卸载后将保留 &#x2F;var&#x2F;lib&#x2F;docker 的内容（镜像、容器、存储卷和网络等），也删除。 1rm -rf /var...</div></div></div></a><a class="pagination-related" href="/2024/11/05/%E3%80%90%E7%A7%91%E7%A0%94%E5%B0%8F%E7%99%BD%E5%BF%85%E5%A4%87%E3%80%91%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91%E6%96%B9%E6%B3%95%E5%8F%8A%E5%B7%A5%E5%85%B7%E6%9C%80%E5%85%A8%E6%95%B4%E7%90%86/" title="【科研小白】翻译论文也能这么简单？从外语小白到论文高手！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">【科研小白】翻译论文也能这么简单？从外语小白到论文高手！</div></div><div class="info-2"><div class="info-item-1">  导读   想要论文全文翻译且格式不变就用ChatPaper，缺点是有使用次数限制。 平替版本为沉浸式翻译的PDF翻译，缺点是格式排版可能有点bug。   逐句精度论文就用Zotero。  PS：都可以配合AI（例如GPT-4），更快速更深入理解论文。   ChatPaper项目地址：https://chatwithpaper.org/ 推荐理由 已上线，操作简单且免费 已缓存过的论文可以快速翻译 整体格式不变，可读性比较高 默认使用 gpt-4o-mini 翻译，效果不错 支持根据 Arxiv ID 翻译 以及本地 PDF 论文翻译  缺点：  有额度限制 可选择的模型比较少  适用场景 在 Arxiv 上已发表的论文，根据 Arxiv ID 进行全文翻译 本地论文 PDF 进行全文翻译  使用方法 使用 Arxiv 上发表的论文《MapGPT: Map-Guided Prompting with Adaptive Path Planning for Vision-and-Language Navigation》进行根据 Arxiv ID 翻译以及根据本地论文 PDF...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/12/17/Docker%E4%B8%8B%E8%BD%BD/" title="Docker下载"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-17</div><div class="info-item-2">Docker下载</div></div><div class="info-2"><div class="info-item-1">CentOS8安装DockerCentOS8使用Docker部署Streamlit 部署环境：  Linux：Linux 操作系统，以 CentOS Stream 8 为例。 Docker：容器管理，以Docker CE 24.0.7为例。  安装卸载旧版本 12345678sudo yum remove docker \                docker-client \                docker-client-latest \                docker-common \                docker-latest \                docker-latest-logrotate \                docker-logrotate \                docker-engine  卸载后将保留 &#x2F;var&#x2F;lib&#x2F;docker 的内容（镜像、容器、存储卷和网络等），也删除。 1rm -rf /var...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/face.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">sbemo</div><div class="author-info-description">阳光</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sbemo"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/sbemo" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:z16639502996@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFDocker"><span class="toc-number">1.1.</span> <span class="toc-text">什么是Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8Docker%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">为什么用Docker？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%92%8C%E9%95%9C%E5%83%8F"><span class="toc-number">1.3.</span> <span class="toc-text">容器和镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dockerfile"><span class="toc-number">1.4.</span> <span class="toc-text">Dockerfile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99Dockerfile%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%8C%E9%9A%8F%E6%97%B6%E8%A1%A5%E5%85%85"><span class="toc-number">1.5.</span> <span class="toc-text">写Dockerfile的注意事项，随时补充</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">2.1.</span> <span class="toc-text">镜像操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">2.2.</span> <span class="toc-text">容器操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%B6%E4%BD%9CDocker%E9%95%9C%E5%83%8F"><span class="toc-number">3.</span> <span class="toc-text">制作Docker镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E5%B7%B2%E6%9C%89%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8docker-commit%E6%9E%84%E5%BB%BA"><span class="toc-number">3.1.</span> <span class="toc-text">根据已有镜像使用docker commit构建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E5%B7%B2%E6%9C%89%E9%95%9C%E5%83%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">拉取已有镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8"><span class="toc-number">3.1.2.</span> <span class="toc-text">运行容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-number">3.1.3.</span> <span class="toc-text">安装依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E9%95%9C%E5%83%8F"><span class="toc-number">3.1.4.</span> <span class="toc-text">导出镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E9%95%9C%E5%83%8F"><span class="toc-number">3.1.5.</span> <span class="toc-text">打包镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E9%95%9C%E5%83%8F"><span class="toc-number">3.1.6.</span> <span class="toc-text">导入镜像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E5%B7%B2%E6%9C%89%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8Dockerfile%E6%9E%84%E5%BB%BA"><span class="toc-number">3.2.</span> <span class="toc-text">根据已有镜像使用Dockerfile构建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BADockerfile"><span class="toc-number">3.2.1.</span> <span class="toc-text">创建Dockerfile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="toc-number">3.2.2.</span> <span class="toc-text">创建镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E9%95%9C%E5%83%8F-1"><span class="toc-number">3.2.3.</span> <span class="toc-text">打包镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Dockerfile%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA"><span class="toc-number">3.2.4.</span> <span class="toc-text">使用Dockerfile从0开始构建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BADockerfile-1"><span class="toc-number">3.3.</span> <span class="toc-text">创建Dockerfile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F-1"><span class="toc-number">3.4.</span> <span class="toc-text">创建镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8"><span class="toc-number">3.5.</span> <span class="toc-text">创建容器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%88%E6%9B%B4%E6%96%B0ing%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">注意事项（更新ing）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-build-%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"><span class="toc-number">4.1.</span> <span class="toc-text">Docker build 缓存机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-build-%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%981"><span class="toc-number">4.2.</span> <span class="toc-text">Docker build 网络问题1</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/17/Docker%E4%B8%8B%E8%BD%BD/" title="Docker下载">Docker下载</a><time datetime="2024-12-16T16:58:40.000Z" title="发表于 2024-12-17 00:58:40">2024-12-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/17/Docker%E6%95%99%E7%A8%8B/" title="Docker教程">Docker教程</a><time datetime="2024-12-16T16:15:29.000Z" title="发表于 2024-12-17 00:15:29">2024-12-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/05/%E3%80%90%E7%A7%91%E7%A0%94%E5%B0%8F%E7%99%BD%E5%BF%85%E5%A4%87%E3%80%91%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91%E6%96%B9%E6%B3%95%E5%8F%8A%E5%B7%A5%E5%85%B7%E6%9C%80%E5%85%A8%E6%95%B4%E7%90%86/" title="【科研小白】翻译论文也能这么简单？从外语小白到论文高手！">【科研小白】翻译论文也能这么简单？从外语小白到论文高手！</a><time datetime="2024-11-05T08:18:39.000Z" title="发表于 2024-11-05 16:18:39">2024-11-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/30/git%E5%B0%8F%E7%99%BD%E6%95%99%E7%A8%8B/" title="【小白必备——Git命令】5分钟学会将本地项目推送到 GitHub！">【小白必备——Git命令】5分钟学会将本地项目推送到 GitHub！</a><time datetime="2024-10-30T06:45:43.000Z" title="发表于 2024-10-30 14:45:43">2024-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/23/%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%8A%80%E6%9C%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E8%87%AA%E5%8A%A8%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" title="【Prompt高手之路】提示词技术进阶——自动提示词工程">【Prompt高手之路】提示词技术进阶——自动提示词工程</a><time datetime="2024-10-23T08:38:51.000Z" title="发表于 2024-10-23 16:38:51">2024-10-23</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div id="footer-wrap"><div class="copyright">&copy;2024 By sbemo</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
