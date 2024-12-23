@@ -9,5 +9,5 @@ Disallow: /js/
 Disallow: /css/
 Disallow: /fonts/
 Disallow: /lib/
-
+Sitemap: https://www.perozs.top/sitemap.xml
 
