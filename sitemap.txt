@@ -1,6 +1,7 @@
 http://perozs.top/tags/index.html
 http://perozs.top/categories/index.html
 http://perozs.top/
+http://perozs.top/tags/AIGC/
 http://perozs.top/tags/Docker/
 http://perozs.top/tags/Github/
 http://perozs.top/tags/Git/
